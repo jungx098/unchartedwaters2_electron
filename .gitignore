@@ -1,0 +1,23 @@
+# Electron build output
+release/
+dist/
+
+# Electron-Builder
+electron-builder.yml
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# npm
+node_modules/
+npm-debug.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
