@@ -1,6 +1,11 @@
 const { app, BrowserWindow, Menu, protocol, session } = require('electron');
 const path = require('path');
 
+// Allow AudioContext to start without user gesture to prevent audio glitches
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+// Disable renderer background throttling so audio timers stay accurate
+app.commandLine.appendSwitch('disable-renderer-backgrounding');
+
 // Check if we're in development mode
 const isDev = process.env.NODE_ENV === 'development' || process.argv.includes('--dev');
 const DEV_SERVER_URL = 'http://localhost:5173';
@@ -17,9 +22,9 @@ function createWindow() {
       contextIsolation: true,
       webSecurity: false, // Needed for dev server and WASM
       allowRunningInsecureContent: false,
-      // Enable features needed for WASM and SharedArrayBuffer
       experimentalFeatures: true,
       enableBlinkFeatures: 'SharedArrayBuffer',
+      backgroundThrottling: false,
     },
     backgroundColor: '#000000',
     title: 'Uncharted Waters 2',
