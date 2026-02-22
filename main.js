@@ -38,9 +38,6 @@ function createWindow() {
   if (isDev) {
     mainWindow.webContents.openDevTools();
   }
-  else {
-    mainWindow.webContents.openDevTools();
-  }
 
   // Create application menu
   const template = [

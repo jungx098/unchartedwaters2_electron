@@ -20,10 +20,10 @@ cd unchartedwaters2 && npm install && cd ..
 To run the application in development mode:
 
 ```bash
-npm run dev
+NODE_ENV=development npm run dev
 ```
 
-This will build the web app and launch the Electron application.
+This will build the web app and launch the Electron application with DevTools enabled.
 
 ## Building
 
