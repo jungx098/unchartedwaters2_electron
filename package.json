@@ -20,7 +20,7 @@
     "game",
     "uncharted-waters"
   ],
-  "author": "",
+  "author": "jeremy0330 <jungx098@users.noreply.github.com>",
   "license": "ISC",
   "devDependencies": {
     "electron": "^40.0.0",
@@ -47,8 +47,14 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "portable"
+        {
+          "target": "nsis",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64", "arm64"]
+        }
       ],
       "icon": "unchartedwaters2/dist/favicon.ico"
     },
