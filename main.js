@@ -132,6 +132,10 @@ function createWindow() {
     return { action: 'deny' };
   });
 
+  mainWindow.webContents.on('will-prevent-unload', (event) => {
+    event.preventDefault();
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
