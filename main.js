@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, protocol, session } = require('electron');
 const path = require('path');
+const windowStateKeeper = require('electron-window-state');
 
 // Allow AudioContext to start without user gesture to prevent audio glitches
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
@@ -13,9 +14,18 @@ const DEV_SERVER_URL = 'http://localhost:5173';
 let mainWindow;
 
 function createWindow() {
+  // Load the previous window state
+  let windowState = windowStateKeeper({
+    defaultWidth: 1280,
+    defaultHeight: 800
+  });
+
   mainWindow = new BrowserWindow({
-    width: 1280,
-    height: 800,
+    x: windowState.x,
+    y: windowState.y,
+    width: windowState.width,
+    height: windowState.height,
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -31,6 +41,9 @@ function createWindow() {
     icon: path.join(__dirname, 'unchartedwaters2/dist/favicon.ico'),
   });
 
+  // Track window state changes
+  windowState.manage(mainWindow);
+
   // Load from dev server in development, built files in production
   if (isDev) {
     mainWindow.loadURL(DEV_SERVER_URL);
@@ -38,6 +51,11 @@ function createWindow() {
     const appPath = path.join(__dirname, 'unchartedwaters2/dist/index.html');
     mainWindow.loadFile(appPath);
   }
+
+  // Show window when ready to prevent blank screen
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   // Open DevTools in development
   if (isDev) {
