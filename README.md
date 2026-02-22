@@ -2,6 +2,16 @@
 
 This is an Electron wrapper for the Uncharted Waters 2 DOS game emulator, allowing you to run the game as a standalone desktop application.
 
+## Download
+
+Download the latest release for your platform:
+
+- **Windows**: Download `Uncharted Waters 2 Setup 1.0.0.exe` (installer) or `Uncharted Waters 2 1.0.0.exe` (portable)
+- **macOS**: Download `Uncharted Waters 2-1.0.0-arm64.dmg` (Apple Silicon)
+- **Linux**: Download `Uncharted Waters 2-1.0.0-arm64.AppImage` or `.deb` package
+
+Visit the [Releases](../../releases) page to download.
+
 ## Prerequisites
 
 - Node.js (v14 or higher)
@@ -37,11 +47,11 @@ To package the Electron app for distribution:
 
 ```bash
 # Build for all platforms
-npm run build:all
+npm run package
 
 # Or build for specific platforms
 npm run package:mac    # macOS
-npm run package:win    # Windows
+npm run package:win    # Windows (x64 + ARM64)
 npm run package:linux  # Linux
 ```
 
@@ -60,6 +70,7 @@ npm start
 - Standalone desktop application
 - Full keyboard and gamepad support
 - Save/Load game functionality
+- **Remembers window size and position** between sessions
 - Fullscreen mode (F11 or Ctrl+Cmd+F on Mac)
 - Zoom controls
 - Developer tools access (Ctrl+Shift+I or Alt+Cmd+I on Mac)
